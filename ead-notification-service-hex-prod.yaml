@@ -1,0 +1,42 @@
+server:
+  port: ${PORT}
+  servlet:
+    context-path: '/ead-notification-hex/'
+
+spring:
+  application:
+    name: ead-notification-service-hex
+  datasource:
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      jdbc:
+        lob.non-contextual-creation: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  rabbitmq:
+    addresses: ${CLOUDAMQP_URL}
+
+ead:
+  broker:
+    exchange:
+      notificationCommandExchange: ead.notificationcommand
+    queue:
+      notificationCommandQueue:
+        name: ead.notificationcommand.ms.notification
+    key:
+      notificationCommandKey: ms.notification
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - refresh
+          - health
