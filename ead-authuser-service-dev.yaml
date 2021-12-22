@@ -25,7 +25,7 @@ spring:
 
 logging:
   level:
-    com.ead: TRACE
+    com.ead: INFO
     root: INFO
 
 ead:
